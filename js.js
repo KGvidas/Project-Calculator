@@ -3,6 +3,9 @@ let aNumber;
 let bNumber;
 let operator;
 
+let display = document.querySelector(".display")
+display.textContent = "Hello"
+
 
 // FUNCTIONS
 function add(aNumber, bNumber){
