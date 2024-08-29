@@ -1,3 +1,10 @@
+// VARIABLES
+let aNumber;
+let bNumber;
+let operator;
+
+
+// FUNCTIONS
 function add(aNumber, bNumber){
     return aNumber + bNumber;
 }
@@ -11,9 +18,6 @@ function divide(aNumber, bNumber){
     return aNumber / bNumber;
 }
 
-let aNumber;
-let bNumber;
-let operator;
 
 function operate(aNumber, bNumber, operator){
    switch (operator) {
