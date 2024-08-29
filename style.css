@@ -52,17 +52,17 @@
  /*  Styles */
 
 .container {
-    
+    background-color: #f3f3f3;
     width: 600px;
-    height: 600px;
+    height: 650px;
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
+    border: 8px solid #222222;
   }
   .display {
-    border: 2px solid green;
-    width: 600px;
-    height: 100px;
+    border: 10px solid #222222;
+    width: 590px;
+    height: 150px;
     margin-bottom: 10px;
   }
  section {
@@ -76,8 +76,19 @@
   button {
     width: 140px;
     height: 90px;
+    border-radius: 8%;
+    font-size: 28px;
+    font-weight: bold;
+    border: 2px solid black;
 
   }
   #spec {
     width: 290px;
+  }
+  .op {
+    background-color: #fbba00;
+  }
+  .grey {
+    background-color: #383838;
+    color: white;
   }
