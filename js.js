@@ -9,94 +9,104 @@ let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
 let operateVariable = document.querySelector("#operate");
 
+// Attach event listeners to operator buttons
 op.forEach(function(op) {
-    updateOpetorStatus(op);
+    updateOperatorStatus(op);
     setOperator(op);
-     });
+});
 
-function updateOpetorStatus(op) {
+function updateOperatorStatus(op) {
     op.addEventListener("click", () => {
+        console.log(operatorStatus);
+        updateNumberVariable();
+        clearDisplay(display);
         operatorStatus = "On";
         console.log(operatorStatus);
-        updateNumberVariable(operatorStatus,aNumber,bNumber,display)
-        clearDisplay(display);
-      });
-    }
+    });
+}
 
 function setOperator(op) {
-    op.addEventListener("click",(e) => {
-        operator = "e.target.id";
-        console.log(e.target.id);
-      });
-    }
-
-numbers.forEach(function(number) {
-   updateDisplay (number)
+    op.addEventListener("click", (e) => {
+        operator = e.target.id; // Correct assignment
+        console.log(operator);
     });
+}
 
-function updateDisplay (number) {
+// Attach event listeners to number buttons
+numbers.forEach(function(number) {
+   updateDisplay(number);
+});
+
+function updateDisplay(number) {
     number.addEventListener("click", (e) => {
         console.log(e.target.textContent);
         display.textContent = display.textContent + e.target.textContent;
-      });
-    }
+    });
+}
 
-function updateNumberVariable(operatorStatus,aNumber,bNumber,display){
-    if (operatorStatus === "Off"){
-        aNumber = display.textContent;
-        console.log(aNumber);
-    } else if (operatorStatus === "On"){
-        bNumber = display.textContent;
-        console.log(bNumber);
+function updateNumberVariable() {
+    if (operatorStatus === "Off") {
+        aNumber = parseFloat(display.textContent); // Parse as number
+        console.log("aNumber: " + aNumber);
+    } else if (operatorStatus === "On") {
+        bNumber = parseFloat(display.textContent); // Parse as number
+        console.log("bNumber: " + bNumber);
     }
 }
 
-function clearDisplay(display){
-    display.textContent = ""
+function clearDisplay(display) {
+    display.textContent = "";
 }
 
- operateVariable.addEventListener("click", () => {
+// Event listener for the "operate" button
+operateVariable.addEventListener("click", () => {
+    updateNumberVariable();
+    let result = operate(aNumber, bNumber, operator); 
+    console.log("Result: " + result); // Display the result
+    clearDisplay(display);
     operatorStatus = "Off";
     console.log(operatorStatus);
-    updateNumberVariable(operatorStatus,aNumber,bNumber,display)
-  });
+});
+
+/*Reiktu sutvarkyti resultata kad rodytu su atskira funkticja */
 
 // BASIC FUNCTIONS
-function add(aNumber, bNumber){
+function add(aNumber, bNumber) {
     return aNumber + bNumber;
 }
-function subtract(aNumber, bNumber){
+
+function subtract(aNumber, bNumber) {
     return aNumber - bNumber;
 }
-function multiply(aNumber, bNumber){
+
+function multiply(aNumber, bNumber) {
     return aNumber * bNumber;
 }
-function divide(aNumber, bNumber){
+
+function divide(aNumber, bNumber) {
+    if (bNumber === 0) {
+        return "Cannot divide by zero"; // Handle division by zero
+    }
     return aNumber / bNumber;
 }
 
+// OPERATION FUNCTION
+function operate(aNumber, bNumber, operator) {
+    switch (operator) {
+        case "add":
+            return add(aNumber, bNumber);
 
-function operate(aNumber, bNumber, operator){
-   switch (operator) {
-    case add:
-        return add(aNumber, bNumber)
-        break;
-
-    case subtract:
-        return subtract(aNumber, bNumber)
-        break;
+        case "subtract":
+            return subtract(aNumber, bNumber);
+            
+        case "multiply":
+            return multiply(aNumber, bNumber);
         
-    case multiply:
-        return multiply(aNumber, bNumber)
-        break;
-    
-    case divide:
-        return divide(aNumber, bNumber)
-        break;
-   
-    default:
-        break;
-   }
-
+        case "divide":
+            return divide(aNumber, bNumber);
+       
+        default:
+            console.log("Invalid operator");
+            return null;
+    }
 }
-
