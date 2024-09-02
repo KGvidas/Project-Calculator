@@ -2,21 +2,22 @@
 let aNumber;
 let bNumber;
 let operator;
-let operatorStatus;
+let operatorStatus = "Off";
 
 let display = document.querySelector(".display");
 let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
 
 op.forEach(function(op) {
-    updateOpetorStatus(op)
-    setOperator(op)
+    updateOpetorStatus(op);
+    setOperator(op);
      });
 
 function updateOpetorStatus(op) {
     op.addEventListener("click", () => {
-        operatorStatus = "Active";
+        operatorStatus = "On";
         console.log(operatorStatus);
+        updateNumberVariable(operatorStatus,aNumber,bNumber,display)
       });
     }
 
@@ -38,7 +39,15 @@ function updateDisplay (number) {
       });
     }
 
-
+function updateNumberVariable(operatorStatus,aNumber,bNumber,display){
+    if (operatorStatus === "Off"){
+        aNumber = display.textContent;
+        console.log(aNumber);
+    } else if (operatorStatus === "On"){
+        bNumber = display.textContent;
+        console.log(bNumber);
+    }
+}
 
 
 // FUNCTIONS
