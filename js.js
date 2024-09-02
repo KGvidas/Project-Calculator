@@ -7,6 +7,7 @@ let operatorStatus = "Off";
 let display = document.querySelector(".display");
 let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
+let operateVariable = document.querySelector("#operate");
 
 op.forEach(function(op) {
     updateOpetorStatus(op);
@@ -18,6 +19,7 @@ function updateOpetorStatus(op) {
         operatorStatus = "On";
         console.log(operatorStatus);
         updateNumberVariable(operatorStatus,aNumber,bNumber,display)
+        clearDisplay(display);
       });
     }
 
@@ -49,8 +51,17 @@ function updateNumberVariable(operatorStatus,aNumber,bNumber,display){
     }
 }
 
+function clearDisplay(display){
+    display.textContent = ""
+}
 
-// FUNCTIONS
+ operateVariable.addEventListener("click", () => {
+    operatorStatus = "Off";
+    console.log(operatorStatus);
+    updateNumberVariable(operatorStatus,aNumber,bNumber,display)
+  });
+
+// BASIC FUNCTIONS
 function add(aNumber, bNumber){
     return aNumber + bNumber;
 }
