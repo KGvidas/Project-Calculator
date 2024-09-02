@@ -3,8 +3,13 @@ let aNumber;
 let bNumber;
 let operator;
 
-let display = document.querySelector(".display")
-display.textContent = "Hello"
+let display = document.querySelector(".display");
+let number = document.querySelector("#seven");
+
+
+number.addEventListener("click", () => {
+display.textContent = display.textContent + number.textContent;
+});
 
 
 // FUNCTIONS
