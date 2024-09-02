@@ -2,15 +2,21 @@
 let aNumber;
 let bNumber;
 let operator;
+let operatorStatus;
 
 let display = document.querySelector(".display");
-let number = document.querySelector("#seven");
+let numbers = document.querySelectorAll(".nmbr");
 
+numbers.forEach(function(number) {
+   updateDisplay (number)
+    });
 
-number.addEventListener("click", () => {
-display.textContent = display.textContent + number.textContent;
-});
-
+function updateDisplay (number) {
+    number.addEventListener("click", (e) => {
+        console.log(e.target.textContent);
+        display.textContent = display.textContent + e.target.textContent;
+      });
+    }
 
 // FUNCTIONS
 function add(aNumber, bNumber){
