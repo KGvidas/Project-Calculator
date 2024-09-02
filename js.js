@@ -6,6 +6,26 @@ let operatorStatus;
 
 let display = document.querySelector(".display");
 let numbers = document.querySelectorAll(".nmbr");
+let op = document.querySelectorAll(".op");
+
+op.forEach(function(op) {
+    updateOpetorStatus(op)
+    setOperator(op)
+     });
+
+function updateOpetorStatus(op) {
+    op.addEventListener("click", () => {
+        operatorStatus = "Active";
+        console.log(operatorStatus);
+      });
+    }
+
+function setOperator(op) {
+    op.addEventListener("click",(e) => {
+        operator = "e.target.id";
+        console.log(e.target.id);
+      });
+    }
 
 numbers.forEach(function(number) {
    updateDisplay (number)
@@ -17,6 +37,9 @@ function updateDisplay (number) {
         display.textContent = display.textContent + e.target.textContent;
       });
     }
+
+
+
 
 // FUNCTIONS
 function add(aNumber, bNumber){
