@@ -35,6 +35,11 @@ function setOperator(op) {
         }})
     };
 
+// PRISPEMINUS PO CLEAR OPERATORIU NEBEIMANOMA GERAI ATLIKTI SKAICIUVIMU 
+// PLS FIX
+
+
+
 function checkForOperateSkip(op){
     op.addEventListener("click", () => {
         if (operatorStatus === "On") {
