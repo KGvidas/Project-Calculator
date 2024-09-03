@@ -8,6 +8,7 @@ let display = document.querySelector(".display");
 let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
 let operateVariable = document.querySelector("#operate");
+let clearBtn = document.querySelector("#clear");
 
 // Attach event listeners to operator buttons
 op.forEach(function(op) {
@@ -68,7 +69,16 @@ operateVariable.addEventListener("click", () => {
     console.log(operatorStatus);
 });
 
+clearBtn.addEventListener("click", () => {
+    clear(display, aNumber, bNumber)
+}
+)
 
+function clear(display, aNumber, bNumber){
+    display.textContent = "";
+    aNumber = "";
+    bNumber = "";
+}
 
 // BASIC FUNCTIONS
 function add(aNumber, bNumber) {
