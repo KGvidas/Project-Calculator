@@ -12,7 +12,6 @@ let clearBtn = document.querySelector("#clear");
 
 // Attach event listeners to operator buttons
 op.forEach(function(op) {
-    console.log("turetu veikt")
     checkForOperateSkip(op);
     updateOperatorStatus(op);
     setOperator(op);
@@ -31,8 +30,10 @@ function setOperator(op) {
     op.addEventListener("click", (e) => {
         operator = e.target.id; // Correct assignment
         console.log(operator);
-    });
-}
+        if( isNaN(aNumber) || isNaN(bNumber)){
+            operator = "";
+        }})
+    };
 
 function checkForOperateSkip(op){
     op.addEventListener("click", () => {
