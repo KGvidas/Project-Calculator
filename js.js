@@ -12,6 +12,8 @@ let clearBtn = document.querySelector("#clear");
 
 // Attach event listeners to operator buttons
 op.forEach(function(op) {
+    console.log("turetu veikt")
+    checkForOperateSkip(op);
     updateOperatorStatus(op);
     setOperator(op);
 });
@@ -20,7 +22,6 @@ function updateOperatorStatus(op) {
     op.addEventListener("click", () => {
         console.log(operatorStatus);
         updateNumberVariable();
-        clearDisplay(display);
         operatorStatus = "On";
         console.log(operatorStatus);
     });
@@ -33,6 +34,21 @@ function setOperator(op) {
     });
 }
 
+function checkForOperateSkip(op){
+    op.addEventListener("click", () => {
+        if (operatorStatus === "On") {
+            aNumber = operate(aNumber, bNumber, operator); 
+            display.textContent = aNumber
+            operatorStatus = "Off";
+            bNumber = "";
+            console.log(bNumber);
+            console.log(operatorStatus);
+            } else if (operatorStatus === "Off") {
+            }
+    });
+}
+
+
 // Attach event listeners to number buttons
 numbers.forEach(function(number) {
    updateDisplay(number);
@@ -40,8 +56,16 @@ numbers.forEach(function(number) {
 
 function updateDisplay(number) {
     number.addEventListener("click", (e) => {
-        console.log(e.target.textContent);
-        display.textContent = display.textContent + e.target.textContent;
+        if (operatorStatus === "Off") {
+            console.log(e.target.textContent);
+            display.textContent = display.textContent + e.target.textContent;
+        }  else if (operatorStatus === "On" && bNumber === ""){
+            display.textContent = "" + e.target.textContent;
+        } else if (operatorStatus === "On") {
+            console.log(e.target.textContent);
+            display.textContent = display.textContent + e.target.textContent;
+        }
+        updateNumberVariable()
     });
 }
 
@@ -61,13 +85,15 @@ function clearDisplay(display) {
 
 // Event listener for the "operate" button
 operateVariable.addEventListener("click", () => {
-    updateNumberVariable();
-    clearDisplay(display);
     aNumber = operate(aNumber, bNumber, operator); 
     display.textContent = aNumber
     operatorStatus = "Off";
+    bNumber = "";
+    console.log(bNumber);
     console.log(operatorStatus);
 });
+
+
 
 clearBtn.addEventListener("click", () => {
     clear(display, aNumber, bNumber)
