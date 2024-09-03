@@ -1,6 +1,6 @@
 // VARIABLES
-let aNumber;
-let bNumber;
+let aNumber = "";
+let bNumber = "";
 let operator;
 let operatorStatus = "Off";
 
