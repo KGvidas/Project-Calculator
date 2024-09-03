@@ -61,14 +61,14 @@ function clearDisplay(display) {
 // Event listener for the "operate" button
 operateVariable.addEventListener("click", () => {
     updateNumberVariable();
-    let result = operate(aNumber, bNumber, operator); 
-    console.log("Result: " + result); // Display the result
     clearDisplay(display);
+    aNumber = operate(aNumber, bNumber, operator); 
+    display.textContent = aNumber
     operatorStatus = "Off";
     console.log(operatorStatus);
 });
 
-/*Reiktu sutvarkyti resultata kad rodytu su atskira funkticja */
+
 
 // BASIC FUNCTIONS
 function add(aNumber, bNumber) {
