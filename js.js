@@ -4,11 +4,19 @@ let bNumber = "";
 let operator;
 let operatorStatus = "Off";
 
+let delBtn = document.querySelector("#del");
 let display = document.querySelector(".display");
 let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
 let operateVariable = document.querySelector("#operate");
 let clearBtn = document.querySelector("#clear");
+
+// Attach event listeners to operator buttons
+delBtn.addEventListener("click", () => {
+    display.textContent = display.textContent.slice(0, -1);
+    updateNumberVariable();
+})
+
 
 // Attach event listeners to operator buttons
 op.forEach(function(op) {
@@ -35,11 +43,6 @@ function setOperator(op) {
         })
         console.log(operator);
     };
-
-// PRISPEMINUS PO CLEAR OPERATORIU NEBEIMANOMA GERAI ATLIKTI SKAICIUVIMU 
-// PLS FIX
-
-
 
 function checkForOperateSkip(op){
     op.addEventListener("click", () => {
@@ -109,7 +112,6 @@ operateVariable.addEventListener("click", () => {
 
 
 clearBtn.addEventListener("click", () => {
-    console.log("I was pressed");
     clear();
 }
 )
@@ -135,7 +137,7 @@ function multiply(aNumber, bNumber) {
 
 function divide(aNumber, bNumber) {
     if (bNumber === 0) {
-        return "Cannot divide by zero"; // Handle division by zero
+        return "You failed"; // Handle division by zero
     }
     return aNumber / bNumber;
 }
