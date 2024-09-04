@@ -91,22 +91,27 @@ function clearDisplay(display) {
 
 // Event listener for the "operate" button
 operateVariable.addEventListener("click", () => {
+    if (bNumber === "" || isNaN === bNumber){
+    
+    } else {
     aNumber = operate(aNumber, bNumber, operator); 
     display.textContent = aNumber
     operatorStatus = "Off";
     bNumber = "";
     console.log(bNumber);
     console.log(operatorStatus);
+    }
 });
 
 
 
 clearBtn.addEventListener("click", () => {
-    clear(display, aNumber, bNumber)
+    console.log("I was pressed");
+    clear();
 }
 )
 
-function clear(display, aNumber, bNumber){
+function clear(){
     display.textContent = "";
     aNumber = "";
     bNumber = "";
