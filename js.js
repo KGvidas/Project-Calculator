@@ -13,8 +13,8 @@ let clearBtn = document.querySelector("#clear");
 // Attach event listeners to operator buttons
 op.forEach(function(op) {
     checkForOperateSkip(op);
-    updateOperatorStatus(op);
     setOperator(op);
+    updateOperatorStatus(op);
 });
 
 function updateOperatorStatus(op) {
@@ -22,6 +22,9 @@ function updateOperatorStatus(op) {
         console.log(operatorStatus);
         updateNumberVariable();
         operatorStatus = "On";
+        if( isNaN(aNumber) || isNaN(bNumber)){
+            operatorStatus = "Off";
+        }
         console.log(operatorStatus);
     });
 }
@@ -29,10 +32,8 @@ function updateOperatorStatus(op) {
 function setOperator(op) {
     op.addEventListener("click", (e) => {
         operator = e.target.id; // Correct assignment
+        })
         console.log(operator);
-        if( isNaN(aNumber) || isNaN(bNumber)){
-            operator = "";
-        }})
     };
 
 // PRISPEMINUS PO CLEAR OPERATORIU NEBEIMANOMA GERAI ATLIKTI SKAICIUVIMU 
@@ -92,7 +93,9 @@ function clearDisplay(display) {
 // Event listener for the "operate" button
 operateVariable.addEventListener("click", () => {
     if (bNumber === "" || isNaN === bNumber){
-    
+        aNumber = parseFloat(display.textContent);
+        console.log("aNumber: " + aNumber);
+        console.log("bNumber: " + bNumber);
     } else {
     aNumber = operate(aNumber, bNumber, operator); 
     display.textContent = aNumber
