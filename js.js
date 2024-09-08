@@ -10,6 +10,23 @@ let numbers = document.querySelectorAll(".nmbr");
 let op = document.querySelectorAll(".op");
 let operateVariable = document.querySelector("#operate");
 let clearBtn = document.querySelector("#clear");
+let decimalsBtn = document.querySelector("#decimals");
+
+// Attach event listeners to decimals button
+decimalsBtn.addEventListener("click", () => {
+    checkForDecimals();
+})
+
+function addDecimals(){
+    display.textContent = display.textContent.slice(0, 1) + '.' + display.textContent.slice(1,7);
+}
+
+function checkForDecimals(){
+    if(!display.textContent || display.textContent[1] === "."){ 
+    } else {
+        addDecimals();
+    }
+}
 
 // Attach event listeners to operator buttons
 delBtn.addEventListener("click", () => {
