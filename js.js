@@ -28,6 +28,11 @@ function checkForDecimals(){
     }
 }
 
+
+// Jeigu paspaudi du kart // arba * susibugina lygtais us + ar - to nebuna
+
+
+
 // Attach event listeners to operator buttons
 delBtn.addEventListener("click", () => {
     display.textContent = display.textContent.slice(0, -1);
@@ -45,14 +50,19 @@ op.forEach(function(op) {
 function updateOperatorStatus(op) {
     op.addEventListener("click", () => {
         console.log(operatorStatus);
-        updateNumberVariable();
-        operatorStatus = "On";
-        if( isNaN(aNumber) || isNaN(bNumber)){
-            operatorStatus = "Off";
+        if (operatorStatus === "Off") {
+            updateNumberVariable(); // Update aNumber only if operatorStatus is "Off"
+            operatorStatus = "On";
+        } else if (operatorStatus === "On" && bNumber === "") {
+            // Do nothing to avoid setting bNumber to the value of aNumber
+        } else if (operatorStatus === "On" && !isNaN(bNumber)) {
+            // If bNumber is a valid number, keep operatorStatus "On"
+            operatorStatus = "On";
         }
         console.log(operatorStatus);
     });
 }
+
 
 function setOperator(op) {
     op.addEventListener("click", (e) => {
@@ -61,19 +71,20 @@ function setOperator(op) {
         console.log(operator);
     };
 
-function checkForOperateSkip(op){
-    op.addEventListener("click", () => {
-        if (operatorStatus === "On") {
-            aNumber = operate(aNumber, bNumber, operator); 
-            display.textContent = aNumber
-            operatorStatus = "Off";
-            bNumber = "";
-            console.log(bNumber);
-            console.log(operatorStatus);
-            } else if (operatorStatus === "Off") {
+    function checkForOperateSkip(op) {
+        op.addEventListener("click", () => {
+            if (operatorStatus === "On" && bNumber !== "") {
+                aNumber = operate(aNumber, bNumber, operator);
+                display.textContent = aNumber;
+                operatorStatus = "Off"; // Reset the operator status
+                bNumber = "";
+    
+                console.log("After operation, bNumber: " + bNumber);
+                console.log("Operator Status: " + operatorStatus);
             }
-    });
-}
+        });
+    }
+    
 
 
 // Attach event listeners to number buttons
@@ -98,13 +109,14 @@ function updateDisplay(number) {
 
 function updateNumberVariable() {
     if (operatorStatus === "Off") {
-        aNumber = parseFloat(display.textContent); // Parse as number
+        aNumber = parseFloat(display.textContent) || aNumber; // Only update if display has a valid number
         console.log("aNumber: " + aNumber);
-    } else if (operatorStatus === "On") {
-        bNumber = parseFloat(display.textContent); // Parse as number
+    } else if (operatorStatus === "On" && display.textContent !== "") {
+        bNumber = parseFloat(display.textContent); // Update only if display has content
         console.log("bNumber: " + bNumber);
     }
 }
+
 
 function clearDisplay(display) {
     display.textContent = "";
@@ -137,6 +149,8 @@ function clear(){
     display.textContent = "";
     aNumber = "";
     bNumber = "";
+    operatorStatus = "Off"
+    operator = "";
 }
 
 // BASIC FUNCTIONS
