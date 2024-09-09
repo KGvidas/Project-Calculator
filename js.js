@@ -85,6 +85,24 @@ function setOperator(op) {
         });
     }
     
+// Attach Keypress event listeners to number buttons
+document.addEventListener('keydown', (event) => {
+    // Check if the pressed key is a digit between '0' and '9'
+    if (!isNaN(event.key) && event.key.trim() !== "") {
+        console.log('A number key was pressed:', event.key);
+
+        if (operatorStatus === "Off") {
+            display.textContent = display.textContent + event.key;
+        } else if (operatorStatus === "On" && bNumber === "") {
+            display.textContent = "" + event.key;
+        } else if (operatorStatus === "On") {
+            display.textContent = display.textContent + event.key;
+        }
+        
+        updateNumberVariable();
+    }
+});
+
 
 
 // Attach event listeners to number buttons
